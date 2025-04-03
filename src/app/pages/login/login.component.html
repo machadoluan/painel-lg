@@ -1,0 +1,66 @@
+<div class="container-login">
+    <div class="login">
+        <div class="login_content">
+            <div class="login_inform">
+                <div class="login_title">Entrar</div>
+                <div class="login_desc">Por favor, ensira seus dados</div>
+            </div>
+
+            <form [formGroup]="userLogin">
+                <div class="form-group">
+                    <i class="pi pi-envelope
+
+                    "></i>
+                    <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email"
+                        (keydown.enter)="focusPassword()">
+                </div>
+
+                <div class="form-group">
+                    <i class="pi pi-lock"></i>
+                    <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password"
+                        formControlName="password" placeholder="Senha" (keydown.enter)="login()" #passwordInput>
+                    <i class="pi" [ngClass]="{'pi-eye': showPassword, 'pi-eye-slash': !showPassword}"
+                        (click)="toggleShowPassword()"></i>
+                </div>
+            </form>
+
+            <div class="user">
+
+
+                <div class="checkbox">
+                    <mat-checkbox>
+                        <span class="checkbox-label">Lembre-me</span>
+                    </mat-checkbox>
+                </div>
+
+                <span class="forgot" (click)="forgotPassword()">Esqueci minha senha</span>
+            </div>
+
+            <button class="login_btn" (click)="login()" (keydown.enter)="login()" [disabled]="userLogin.invalid"> Entrar
+            </button>
+            <span class="register">Não tem uma conta? <a routerLink="/register">Registre-se</a></span>
+        </div>
+    </div>
+</div>
+
+
+<p-dialog [(visible)]="display" [modal]="true" [closable]="true" [draggable]="false" [resizable]="false"
+    styleClass="forgotPassword">
+    <header>
+        <div class="icon">
+            <i class="pi pi-lock"></i>
+        </div>
+        <span id="title">Esqueceu sua senha?</span>
+        <span>Digite seu e-mail para redefini-lo!</span>
+    </header>
+    <form [formGroup]="formForgot">
+        <div class="form-group">
+            <label for="">Email</label>
+            <input type="email" pInputText placeholder="Digite seu email" formControlName="email">
+            <button [disabled]="formForgot.invalid" (click)="onSubmit()">Confirmar</button>
+            <span (click)="display = false">
+                <i class="pi pi-angle-left
+                "></i> Retornar para tela de login</span>
+        </div>
+    </form>
+</p-dialog>

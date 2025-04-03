@@ -1,0 +1,35 @@
+.container_sheet {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-radius: var(--p-inputtext-border-radius);
+
+
+    span {
+        width: 100%;
+        padding: .5rem;
+        background-color: var(--primary);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .5rem;
+        border-radius: var(--p-inputtext-border-radius);
+        color: white;
+        font-size: 14px;
+
+        i {
+            width: 20px;
+            height: 15px;
+            display: flex;
+            place-content: center;
+        }
+    }
+}
+
+
+::ng-deep .mat-bottom-sheet-container{
+    border-radius: 20px 20px 0 0 !important;
+}

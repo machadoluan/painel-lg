@@ -1,0 +1,69 @@
+<p-dialog [(visible)]="display" [modal]="true" [draggable]="false" [resizable]="false" header="Criar pacientes"
+    (onHide)="redirecionar()" styleClass="meu_dialo2">
+
+    <form [formGroup]="dadosCadastroTrips">
+        <div class="form-group">
+            <label for="nomeClinica">Nome da Clínica</label>
+            <input pInputText id="nomeClinica" aria-describedby="nomeClinica-help"
+                placeholder="Digite o nome da clínica" formControlName="nomeClinica" />
+        </div>
+        <div class="form-group">
+            <label for="nomeDoutor">Nome do Doutor</label>
+            <input pInputText id="nomeDoutor" aria-describedby="nomeDoutor-help" placeholder="Digite o nome do doutor"
+                formControlName="nomeDoutor" />
+        </div>
+        <div class="form-group">
+            <label for="nomePaciente">Nome do Paciente</label>
+            <input pInputText id="nomePaciente" aria-describedby="nomePaciente-help"
+                placeholder="Digite o nome do paciente" formControlName="nomePaciente" />
+        </div>
+        <div class="form-group">
+            <label for="sexo">Sexo</label>
+            <input pInputText id="sexo" aria-describedby="sexo-help" placeholder="Digite o sexo"
+                formControlName="sexo" />
+        </div>
+        <div class="form-group">
+            <label for="hora">Hora</label>
+            <input pInputText id="hora" aria-describedby="hora-help" placeholder="Digite a hora"
+                formControlName="hora" />
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input pInputText id="email" aria-describedby="email-help" placeholder="Digite o email"
+                formControlName="email" />
+        </div>
+        <div class="data_hora">
+            <div class="form-group">
+                <label for="dataInicio">Data Início</label>
+                <p-datepicker forceNumericKeyboard dateFormat="dd/mm/yy" formControlName="dataInicio"
+                    showOnFocus="false" showIcon="true" />
+            </div>
+            <div class="form-group">
+                <label for="dataFinal">Data Final</label>
+                <p-datepicker forceNumericKeyboard dateFormat="dd/mm/yy" formControlName="dataFinal" showOnFocus="false"
+                    showIcon="true" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="previsaoDias">Previsão de Dias</label>
+            <p-inputNumber forceNumericKeyboard formControlName="previsaoDias" [min]="0"
+                placeholder="Digite a previsão de dias"></p-inputNumber>
+        </div>
+        <div class="form-group">
+            <label for="instrucoes">Instruções</label>
+            <textarea rows="5" cols="30" pTextarea autoResize="none" placeholder="Digite as instruções"
+                formControlName="instrucoes"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <p-select inputId="status" formControlName="status" [options]="statusOptions" optionLabel="label"
+                placeholder="Selecione o status" [style]="{ width: '100%' }" />
+        </div>
+
+        <div class="btns">
+            <button (click)="closeDialog()">Cancelar</button>
+            <button [disabled]="dadosCadastroTrips.invalid" (click)="createTrip()">Criar</button>
+        </div>
+    </form>
+
+</p-dialog>

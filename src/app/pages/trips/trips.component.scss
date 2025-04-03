@@ -1,0 +1,671 @@
+ .container_viagens {
+     width: 100%;
+     padding: 0 20px;
+
+     .viagens_header {
+         width: 100%;
+         display: flex;
+         justify-content: space-between;
+         padding: 1.5rem 0;
+         align-items: center;
+         background-color: var(--background-color);
+
+         .title {
+             font-weight: bold;
+         }
+
+         .acoes {
+             display: flex;
+             align-items: center;
+             gap: 1rem;
+
+             .search {
+                 .p-inputtext {
+                     width: 200px;
+
+                     background-color: transparent !important;
+                     border: 1px solid rgba($color: #000000, $alpha: 0.3) !important;
+                     color: #000000 !important;
+                     font-size: 14px !important;
+                 }
+             }
+
+             .atalho-btn {
+                 display: flex;
+                 align-items: center;
+                 padding: .5rem 1rem;
+                 cursor: pointer;
+                 gap: .5rem;
+                 border: 1px solid rgba($color: #000000, $alpha: 0.3) !important;
+                 border-radius: var(--p-inputtext-border-radius);
+                 font-size: 14px;
+                 position: relative;
+
+                 i {
+                     color: var(--p-form-field-placeholder-color);
+                     font-size: 14px;
+
+                 }
+
+                 &.openFilter {
+                     background-color: var(--card-border);
+                 }
+
+                 &.delete {
+                     border: 1px solid rgba($color: red, $alpha: 0.7) !important;
+                     background-color: red;
+                     color: white;
+                     font-weight: 500;
+
+                     i {
+                         color: white;
+
+                         font-size: 14px;
+
+                     }
+                 }
+
+
+
+                 .filter_content {
+                     width: 250px;
+                     position: absolute;
+                     padding: 1rem;
+                     background-color: var(--background-color);
+                     border-radius: 8px;
+                     max-width: 300px;
+                     box-shadow: 0px 0px 13px 12px rgba(0, 0, 0, 0.1);
+                     margin: 0 auto;
+                     z-index: 9;
+                     top: 150%;
+                     right: 0;
+
+                     .filter_nav {
+                         .filter_list {
+                             list-style: none;
+                             padding: 0;
+                             margin: 0;
+
+                             .filter_item {
+                                 margin-bottom: 0.5rem;
+
+                                 .filter_link {
+                                     display: block;
+                                     padding: 0.5rem;
+                                     background-color: #fff;
+                                     border-radius: 4px;
+                                     color: #555;
+                                     text-decoration: none;
+                                     font-size: 14px;
+                                     transition: all 0.3s ease;
+
+                                     &:hover {
+                                         background-color: var(--card-border);
+                                     }
+
+                                     &.active {
+                                         background-color: rgba($color: #0056b3, $alpha: 0.5);
+                                         border-color: #0056b3;
+                                         color: white;
+                                         font-weight: bold;
+                                     }
+                                 }
+                             }
+                         }
+                     }
+                 }
+             }
+
+             .btn_new_pacientes {
+                 display: flex;
+                 gap: .5rem;
+                 align-items: center;
+                 padding: .5rem 1rem;
+                 background-color: var(--primary);
+                 font-weight: bold;
+                 color: white;
+                 font-size: 14px;
+                 cursor: pointer;
+
+                 border-radius: var(--p-inputtext-border-radius);
+
+                 i {
+
+                     font-size: 14px;
+
+                 }
+             }
+
+
+         }
+     }
+
+     .viagens_mobile {
+         display: none;
+         flex-direction: column;
+         gap: 1rem;
+
+         .criar {
+             width: 40px;
+             height: 40px;
+             position: fixed;
+             right: 20px;
+             bottom: 80px;
+             display: grid;
+             place-content: center;
+             border-radius: 50%;
+             background-color: var(--primary);
+             font-size: 12px;
+             color: var(--primary);
+             font-weight: bold;
+
+             i {
+                 font-size: 16px;
+                 color: white;
+             }
+         }
+
+         .pacientes {
+             padding: 1rem;
+             display: flex;
+             flex-direction: column;
+             align-items: flex-start;
+             gap: .5rem;
+             border: 1px solid rgba($color: #000, $alpha: 0.3);
+             border-radius: 10px;
+             cursor: pointer;
+
+             .cliente {
+                 font-size: 14px;
+                 font-weight: bold;
+             }
+
+             .pacientes_dados {
+                 width: 100%;
+                 font-size: 12px;
+                 display: flex;
+                 justify-content: space-between;
+                 align-items: center;
+
+                 #pacientes {
+                     align-items: center;
+                     white-space: nowrap;
+                     overflow: hidden;
+                     text-overflow: ellipsis;
+
+                 }
+
+                 span {
+                     flex: 1;
+
+                     &:nth-child(2) {
+                         text-align: end;
+
+                     }
+                 }
+
+
+
+                 .p-tag-success,
+                 .p-tag-warn {
+                     width: auto !important;
+                     font-size: 10px;
+                 }
+             }
+         }
+     }
+ }
+
+
+ // Style Table
+ ::ng-deep .p-datatable-thead>tr>th {
+    background-color: var(--card-border) !important;
+    color: black !important;
+    font-size: 14px;
+    font-weight: 400;
+    border-style: none !important;
+
+}
+
+::ng-deep .p-datatable-tbody>tr {
+    background-color: transparent !important;
+}
+
+::ng-deep .p-datatable-tbody>tr>td {
+    background-color: transparent !important;
+    color: black !important;
+    font-weight: 500;
+    font-size: 12px;
+    border-color: var(--card-border) !important
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:first-child {
+
+    border-radius: 10px 0 0 10px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:last-child {
+    border-radius: 0 10px 10px 0;
+
+}
+
+::ng-deep .p-checkbox-box {
+    background-color: transparent !important;
+}
+
+::ng-deep .p-checkbox-checked .p-checkbox-box {
+    background-color: var(--primary) !important;
+    border-color: transparent !important;
+
+}
+
+::ng-deep .p-checkbox-checked .p-checkbox-icon {
+    color: white !important;
+}
+
+.checkbox {
+    width: 10px !important;
+}
+
+
+.registros {
+    text-align: start !important;
+    color: #000 !important;
+    padding: 0;
+}
+
+.status{
+    .p-tag-warn{
+        width: 100%;
+    }
+}
+::ng-deep .p-paginator {
+    background-color: transparent !important;
+}
+
+::ng-deep .p-paginator-page.p-paginator-page-selected {
+    color: #000 !important;
+    background-color: rgba($color: #000000, $alpha: 0.1) !important;
+
+}
+
+ .select {
+     width: 100%;
+     justify-content: center;
+     display: flex;
+ }
+
+
+
+
+ ::ng-deep .meu_dialog {
+     height: 25% !important;
+     width: 30% !important;
+     border-color: none !important;
+     background-color: var(--background-color) !important;
+
+     .p-button-text.p-button-secondary:not(:disabled):hover {
+         background-color: var(--card-border) !important;
+     }
+
+     .p-dialog-title {
+         font-size: 16px !important;
+         color: var(--color) !important;
+     }
+
+     .p-dialog-footer {
+         button {
+             padding: .4rem .5rem;
+             cursor: pointer;
+
+             &#cancel {
+                 border: 1px solid #000 !important;
+                 background-color: transparent !important;
+                 border: none;
+                 border-radius: 5px;
+                 color: black !important;
+                 font-weight: 500;
+             }
+
+             &#exportar {
+                 background-color: var(--primary);
+                 border: none;
+                 border-radius: 5px;
+             }
+         }
+     }
+ }
+
+ ::ng-deep .p-tag-success {
+     width: 90%;
+     background: #86efac !important;
+     color: black !important;
+     font-weight: 400 !important;
+     font-size: 14px;
+
+ }
+
+ ::ng-deep .p-tag-warn {
+     background: #fdba74 !important;
+     font-size: 14px;
+
+     color: black !important;
+     font-weight: 400 !important;
+ }
+
+
+
+ @media screen and (max-width: 750px) {
+
+
+     .container_viagens {
+         width: 100%;
+
+         .viagens_header {
+             flex-direction: column;
+             gap: 1rem;
+             padding: 1rem 0 1rem 0;
+
+             span {
+                 display: none;
+             }
+
+             .acoes {
+                 display: flex;
+                 align-items: center;
+                 gap: 1rem;
+                 width: 100% !important;
+
+                 .search {
+                     width: 100%;
+
+                     .p-inputtext {
+                         width: 100%;
+
+                         background-color: transparent !important;
+                         border: 1px solid rgba($color: #000000, $alpha: 0.3) !important;
+                         color: #000000 !important;
+                         font-size: 14px !important;
+                     }
+                 }
+
+                 .filter {
+                     display: flex;
+                     align-items: center;
+                     padding: .5rem 1rem;
+                     cursor: pointer;
+                     gap: .5rem;
+                     border: 1px solid rgba($color: #000, $alpha: 0.3);
+                     border-radius: var(--p-inputtext-border-radius);
+                     font-size: 14px;
+
+                     i {
+                         color: var(--p-form-field-placeholder-color);
+                         font-size: 14px;
+
+                     }
+                 }
+
+                 .btn_new_pacientes {
+                     display: none !important;
+
+                 }
+             }
+         }
+
+         .viagens_table {
+             display: none !important;
+         }
+
+         .viagens_mobile {
+             display: flex;
+         }
+
+     }
+ }
+
+
+
+ @media screen and (max-width: 400px) {
+
+     .container_viagens {
+         width: 100%;
+
+         .viagens_header {
+             flex-direction: column;
+             gap: 1rem;
+
+             .title {
+                 font-weight: bold;
+             }
+
+             .acoes {
+                 display: flex;
+                 align-items: center;
+                 gap: 1rem;
+                 width: 100% !important;
+
+                 .search {
+                     width: 100%;
+
+                     .p-inputtext {
+                         width: 100%;
+
+                         background-color: transparent !important;
+                         border: 1px solid rgba($color: #000000, $alpha: 0.3) !important;
+                         color: #000000 !important;
+                         font-size: 12px !important;
+                     }
+                 }
+
+                 .filter {
+                     display: flex;
+                     align-items: center;
+                     padding: .5rem 1rem;
+                     cursor: pointer;
+                     gap: .5rem;
+                     border: 1px solid rgba($color: #000, $alpha: 0.3);
+                     border-radius: var(--p-inputtext-border-radius);
+                     font-size: 14px;
+
+                     span {
+                         display: none !important;
+                     }
+
+                     i {
+                         color: var(--p-form-field-placeholder-color);
+                         font-size: 14px;
+                     }
+                 }
+
+                 .btn_new_pacientes {
+                     display: none !important;
+
+                 }
+             }
+         }
+
+     }
+ }
+
+
+
+ ::ng-deep .p-overlaybadge .p-badge {
+     background-color: var(--primary);
+     color: white;
+     outline: none !important;
+ }
+
+ ::ng-deep .p-button-outlined.p-button-secondary {
+     color: #000 !important;
+ }
+
+ ::ng-deep .p-button-danger {
+     background-color: red !important;
+     color: white !important;
+ }
+
+
+ #contentToConvert {
+     width: 210mm;
+     //  height: 297mm;
+     box-sizing: border-box;
+     page-break-inside: avoid;
+     /* Evita quebra no meio do conteúdo */
+     page-break-before: auto;
+     page-break-after: auto;
+     overflow: hidden;
+     /* Garante que nada vaze pra outra página */
+     display: none;
+
+     .header {
+         text-align: center;
+         padding: 3rem 0;
+         background-color: var(--primary);
+         color: white;
+         font-weight: bold;
+         font-size: 20px;
+         position: relative;
+
+         .export-date {
+             position: absolute;
+             bottom: 5px;
+             right: 5px;
+             font-size: 10px;
+             font-weight: normal;
+
+             span {
+                 font-weight: bold;
+
+             }
+         }
+     }
+
+     .container {
+         flex-grow: 1;
+         width: 100%;
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-content: center;
+
+         .trip {
+             padding-top: 4rem;
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             justify-content: center;
+             gap: 3rem;
+             font-size: 20px;
+             font-weight: bold;
+             color: rgba($color: #000, $alpha: 0.7);
+
+
+             .container_dados {
+                 width: 70%;
+                 gap: 8rem;
+                 display: flex;
+                 background-color: rgba($color: #d1d1d1, $alpha: .05);
+                 border-radius: 5px;
+                 padding: 10px;
+
+                 .first_dados {
+                     flex: 1;
+                     display: flex;
+                     flex-direction: column;
+                     gap: .5rem;
+
+                     div {
+                         display: flex;
+
+                         #title {
+                             width: 90px;
+                             font-size: 14px;
+                             color: rgba($color: #000, $alpha: 0.7);
+                             font-weight: 500;
+                         }
+
+                         span {
+                             font-size: 14px;
+                             font-weight: bold;
+                             color: rgba($color: #000, $alpha: 0.7);
+                         }
+                     }
+                 }
+
+                 .second_dados {
+                     flex: 1;
+                     display: flex;
+                     flex-direction: column;
+                     gap: 1rem;
+
+                     div {
+                         display: flex;
+                         flex-direction: column;
+                         gap: .5rem;
+
+                         #title {
+                             width: 90px;
+                             font-size: 14px;
+                             color: rgba($color: #000, $alpha: 0.7);
+                             font-weight: 500;
+                         }
+
+                         span {
+                             font-size: 14px;
+                             font-weight: bold;
+                             color: rgba($color: #000, $alpha: 0.7);
+                         }
+
+                         .concluido {
+                             color: #1AB752;
+                         }
+
+                         .andamento {
+                             color: #f1b635;
+                         }
+                     }
+                 }
+             }
+         }
+
+         .reports {
+             padding-top: 4rem;
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             justify-content: center;
+             gap: 3rem;
+             font-size: 20px;
+             font-weight: bold;
+             color: rgba($color: #000, $alpha: 0.7);
+
+             .container_dados {
+                 display: flex;
+                 background-color: rgba($color: #d1d1d1, $alpha: .1);
+                 border-radius: 5px;
+                 padding: 10px 2rem;
+
+                 &::ng-deep .p-table-pdf {
+                     page-break-inside: avoid;
+                 }
+
+                 &::ng-deep .p-table-pdf .p-datatable-thead>tr>th {
+                     background-color: transparent !important;
+                     color: black !important;
+                     font-size: 14px !important;
+                     font-weight: 400;
+                     border-style: none !important;
+                 }
+
+                 #visualizar {
+                     color: #3B82F6;
+                 }
+
+
+             }
+         }
+
+
+     }
+ }

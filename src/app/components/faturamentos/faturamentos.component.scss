@@ -1,0 +1,41 @@
+::ng-deep .meu_dialogFatura {
+    width: 30%;
+    padding: 0 1rem;
+    background-color: var(--background-color) !important;
+    color: var(--color) !important;
+
+
+    .faturamentos {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        .mes {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            padding: .5rem;
+            border: 2px solid var(--card-border);
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        width: 50%;
+    }
+
+    @media (max-width: 992px) {
+        width: 60%;
+    }
+
+    @media (max-width: 768px) {
+        width: 70%;
+    }
+
+    @media (max-width: 576px) {
+        width: 90%;
+        padding: 0 0.5rem;
+    }
+}

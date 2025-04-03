@@ -1,0 +1,87 @@
+<div class="container_create">
+    <form [formGroup]="dadosReport">
+        <div class="form-group">
+            <label for="cliente">pacientes</label>
+            <p-select [options]="viagens" optionLabel="nomeFormatado" placeholder="Selecionar a pacientes"
+                class="w-full md:w-56" emptyMessage="Nenhuma pacientes encontrada" formControlName="pacientes" />
+        </div>
+        <div class="form-group">
+            <label for="origem">Tipo</label>
+            <p-select [options]="registroTipo" optionLabel="Tipo" placeholder="Selecione o tipo do registro"
+                class="w-full md:w-56" formControlName="tipo" />
+
+        </div>
+        <div class="data_hora">
+            <div class="form-group">
+                <label for="data">Data</label>
+                <p-datepicker forceNumericKeyboard dateFormat="dd/mm/yy" formControlName="data" placeholder="00/00/0000"
+                    showOnFocus="false" showIcon="true" inputId="data"></p-datepicker>
+
+            </div>
+            <div class="form-group">
+                <label for="hora">Hora</label>
+
+                <div class="input-icon-wrapper">
+                    <input mask="00:00" pInputText id="hora" placeholder="00:00" formControlName="hora" inputmode="numeric" />
+
+                    <div class="icon-button" (click)="timepicker.open()">
+                        <i class="pi pi-clock"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="descricao">Descrição</label>
+            <textarea rows="5" cols="30" pTextarea autoResize="none" placeholder="Digite algo..."
+                formControlName="descricao"> </textarea>
+        </div>
+        <div class="form-group file_photo">
+
+            <label for="foto">Selecionar imagem</label>
+            <input type="file" id="foto" name="foto" accept="image/*" class="form-control"
+                (change)="onFilesSelected($event)" multiple #fileInput>
+
+            <div class="file-add">
+                <div *ngFor="let file of selectedFiles; let i = index" class="item">
+                    <!-- Nome do arquivo -->
+                    <img [src]="imagePreviews[i]" *ngIf="imagePreviews[i]" alt="Image preview" width="200px" class="img"
+                        (click)="openFullScreenImage(imagePreviews[i])">
+                    <!-- Pré-visualização da imagem -->
+                    <div class="excluir" (click)="removeFile(i)">
+                        <i class="fa-solid fa-x" style="color: white; font-size: 10px;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btns">
+            <button (click)="createReport()"
+                [disabled]="selectedFiles.length === 0 || dadosReport.invalid">Criar</button>
+            <button routerLink="/reports">Cancelar</button>
+        </div>
+
+    </form>
+
+</div>
+
+
+
+
+
+<div class="full-screen-image" *ngIf="fullScreenImageUrl">
+    <div class="excluir" (click)="closeFullScreenImage()" style="display: grid; top: 10px; right: 10px; width: 30px;
+    height: 30px;">
+        <i class="fa-solid fa-x" style="color: white; font-size: 16px; "></i>
+    </div>
+    <img [src]="fullScreenImageUrl" alt="Full screen image">
+</div>
+<div class="background_criando" *ngIf="isLoading">
+    <div class="criando">
+        <p-progress-spinner ariaLabel="loading" />
+        Criando registro...
+    </div>
+</div>
+
+
+<ngx-mat-timepicker #timepicker (timeSet)="onTimeSelected($event)" [format]="24"></ngx-mat-timepicker>

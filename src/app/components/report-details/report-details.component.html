@@ -1,0 +1,148 @@
+<div class="container_trip" *ngIf="isMobile">
+    <header>
+        <div class="back" routerLink="/reports">
+            <i class="fa-solid fa-angle-left"></i>
+        </div>
+        <div class="pacientes" *ngIf="registro">
+            {{registro.tipo}}
+        </div>
+        <div class="menu">
+            <i class="fa-solid" [ngClass]="{'fa-bars': !dropdownMenu, 'fa-close': dropdownMenu}"
+                (click)="openDropDown()"></i>
+
+
+            <div class="dropItens" *ngIf="dropdownMenu">
+                <span (click)="editar()"><i class="fa-solid fa-edit"></i> Editar</span>
+                <!-- <span (click)="exportToPDF()"><i class="fa-solid fa-file-pdf"></i> Exportar como pdf</span>
+                <span><i class="fa-solid fa-file-excel"></i> Exportar como excel</span> -->
+                <span (click)="shareTrip()"><i class="fa-solid fa-share"></i> Compartilhar</span>
+                <span (click)="delete(registro)"><i class="fa-solid fa-trash"></i> Excluir</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="trip_content">
+        <form *ngIf="registro" [formGroup]="dadosUpdate">
+            <div class="form-group">
+                <label for="pacientes">pacientes</label>
+                <input pInputText id="pacientes_nome" name="pacientes_nome" formControlName="pacientes_nome"
+                    aria-describedby="username-help" placeholder="Data de Início" />
+            </div>
+            <div class="form-group">
+                <label for="tipo">Tipo</label>
+                <p-select [options]="registroTipo" optionLabel="Tipo" placeholder="Selecione o tipo do registro"
+                    class="w-full md:w-56" formControlName="tipo" />
+            </div>
+            <div class="data_hora">
+                <div class="form-group">
+                    <label for="data_inicio">Data</label>
+                    <p-datepicker forceNumericKeyboard  dateFormat="dd/mm/yy" formControlName="data" formControlName="data" />
+                </div>
+                <div class="form-group">
+                    <label for="data_fim">Hora</label>
+                    <input pInputText id="data_fim" name="data_fim" aria-describedby="username-help"
+                        formControlName="hora" placeholder="Hora de Fim" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição</label>
+                <textarea rows="5" cols="30" name="descricao" formControlName="descricao" pTextarea autoResize="none"
+                    placeholder="Digite algo..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Fotos</label>
+                <div class="photos">
+                    <div class="img" *ngFor="let foto of registro.foto">
+                        <img [src]="foto" alt="" (click)="openFullScreenImage(foto)">
+                        <!-- <div class="delete" *ngIf="editReport">
+                            <i class="fa-solid fa-trash"></i>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="btns">
+                <button *ngIf="editReport" (click)="reportUpdate()">Salvar</button>
+            </div>
+        </form>
+
+
+    </div>
+
+</div>
+
+
+
+<p-dialog [(visible)]="showDialog" [draggable]="false" (onHide)="redirecionar()" [resizable]="false" [modal]="true"
+    [closable]="true" [dismissableMask]="true" styleClass="meu_dialo3">
+
+    <ng-template #header>
+        <div class="flex justify-between items-center w-full">
+            <div class="pacientes" *ngIf="registro">
+                Detalhes do registro
+            </div>
+
+        </div>
+    </ng-template>
+
+    <ng-container *ngIf="registro">
+        <form [formGroup]="dadosUpdate" class="form-desk">
+            <div class="form-group">
+                <label for="pacientes">pacientes atual</label>
+                <input pInputText id="pacientes_nome" name="pacientes_nome" formControlName="pacientes_nome"
+                    aria-describedby="username-help" />
+            </div>
+            <div class="form-group">
+                <label for="tipo">Tipo</label>
+                <p-select [options]="registroTipo" optionLabel="Tipo" placeholder="Selecione o tipo do registro"
+                    class="w-full md:w-56" formControlName="tipo" />
+            </div>
+            <div class="data_hora">
+                <div class="form-group">
+                    <label for="data_inicio">Data</label>
+                    <p-datepicker forceNumericKeyboard  dateFormat="dd/mm/yy" formControlName="data" formControlName="data" />
+
+                </div>
+                <div class="form-group">
+                    <label for="hora">Hora</label>
+                    <input pInputText id="hora" name="hora" aria-describedby="username-help" formControlName="hora"
+                        placeholder="Hora de Fim" mask="00:00" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição</label>
+                <textarea rows="5" cols="30" name="descricao" formControlName="descricao" pTextarea autoResize="none"
+                    placeholder="Digite algo..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Fotos</label>
+                <div class="photos">
+                    <div class="img" *ngFor="let foto of registro.foto">
+                        <img [src]="foto" alt="" (click)="openFullScreenImage(foto)">
+                        <!-- <div class="delete" *ngIf="editReport">
+                            <i class="fa-solid fa-trash"></i>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="btns">
+                <button *ngIf="editReport" (click)="reportUpdate()">Salvar</button>
+                <button *ngIf="editReport" (click)="delete(registro)">Excluir</button>
+                <button *ngIf="!editReport" (click)="editar()">Editar dados</button>
+            </div>
+        </form>
+    </ng-container>
+</p-dialog>
+
+
+
+<div class="full-screen-image" *ngIf="fullScreenImageUrl">
+    <div class="btn-atalho close" (click)="closeFullScreenImage()" style="display: grid; top: 20px; right: 10px; width: 30px;
+    height: 30px;">
+        <i class="fa-solid fa-x" style="color: white; font-size: 16px; "></i>
+    </div>
+    <div class="btn-atalho baixar" (click)="downloadImage(fullScreenImageUrl)" style="display: grid; top: 20px; right: 50px; width: 30px;
+    height: 30px;">
+        <i class="fa-solid fa-download" style="color: white; font-size: 16px; "></i>
+    </div>
+    <img [src]="fullScreenImageUrl" alt="Full screen image">
+</div>

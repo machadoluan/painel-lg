@@ -1,0 +1,15 @@
+<p-dialog [(visible)]="display" [modal]="true" [draggable]="false" [resizable]="false" header="Faturamentos"
+    styleClass="meu_dialogFatura">
+
+    <div class="faturamentos">
+        <div class="mes" *ngFor="let faturamento of faturamentos">
+            <span>Referente: {{faturamento.mesReferente.toString().padStart(2, '0')}} /
+                {{faturamento.anoReferente}}</span>
+            <span>Total Faturados: {{formatarDinheiro(faturamento.total)}}</span>
+        </div>
+
+        <span *ngIf="faturamentos.length <= 0">Nenhum faturamento encontrado</span>
+    </div>
+
+
+</p-dialog>

@@ -1,0 +1,236 @@
+<div *ngIf="isMobile" class="container_trip">
+    <div class="content_trip">
+        <header>
+            <div class="back" routerLink="/trip">
+                <i class="fa-solid fa-angle-left"></i>
+            </div>
+            <div class="pacientes" *ngIf="pacientes">
+                <!-- {{pacientes.origem}} → {{pacientes.destino}} -->
+            </div>
+            <div class="menu">
+                <i class="fa-solid" [ngClass]="{'fa-bars': !dropdownMenu, 'fa-close': dropdownMenu}" (click)="openDropDown()"></i>
+
+
+                <div class="dropItens" *ngIf="dropdownMenu">
+                    <span (click)="editar()"><i class="fa-solid fa-edit"></i> Editar</span>
+                    <!-- <span (click)="exportToPDF()"><i class="fa-solid fa-file-pdf"></i> Exportar como pdf</span>
+                    <span><i class="fa-solid fa-file-excel"></i> Exportar como excel</span> -->
+                    <span  (click)="shareTrip()"><i class="fa-solid fa-share" ></i> Compartilhar</span>
+                    <span (click)="delete( pacientes)"><i class="fa-solid fa-trash"></i> Excluir</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="trip_content">
+            <form *ngIf="pacientes" [formGroup]="dadosUpdate">
+                <div class="form-group">
+                    <label for="cliente">Cliente</label>
+                    <input pInputText id="cliente" name="cliente" aria-describedby="username-help"
+                        placeholder="Digite o nome do cliente" formControlName="cliente" />
+                </div>
+                <div class="form-group">
+                    <label for="origem">Origem</label>
+                    <input pInputText id="origem" name="origem" aria-describedby="username-help"
+                        placeholder="Digite a origem" formControlName="origem" />
+                </div>
+                <div class="form-group">
+                    <label for="destino">Destino</label>
+                    <input pInputText id="destino" name="destino" aria-describedby="username-help"
+                        placeholder="Digite o destino" formControlName="destino" />
+                </div>
+                <div class="form-group">
+                    <label for="valor">Valor</label>
+                    <p-inputNumber formControlName="valor" mode="currency" currency="BRL" locale="pt-BR"
+                        [minFractionDigits]="2" [maxFractionDigits]="2" placeholder="Digite o valor"
+                        placeholder="R$: 00,00"></p-inputNumber>
+
+                </div>
+                <div class="data_hora">
+                    <div class="form-group">
+                        <label for="data_incio">Data inicio</label>
+                        <p-datepicker forceNumericKeyboard  dateFormat="dd/mm/yy" formControlName="dataInicio" showOnFocus="false"
+                        showIcon="true"/>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="data_fim">Data Fim</label>
+                        <p-datepicker forceNumericKeyboard  dateFormat="dd/mm/yy" formControlName="dataFim" showOnFocus="false"
+                        showIcon="true"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="descricao">Descrição</label>
+                    <textarea rows="5" cols="30" name="descricao" pTextarea autoResize="none"
+                        formControlName="descricao" placeholder="Digite algo..."></textarea>
+                </div>
+                <div class="btns">
+                    <button *ngIf="editTrip" (click)="tripsUpdate()" id="salvar">Salvar</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+<p-dialog [(visible)]="showDialog" [draggable]="false" (onHide)="redirecionar()" [resizable]="false" [modal]="true"
+    [closable]="true" [dismissableMask]="true" styleClass="meu_dialo3" [style]="{width: '50vw'}">
+
+    <ng-template #header>
+        <div class="flex justify-between items-center w-full">
+            <!-- <div class="pacientes" *ngIf="pacientes">
+                Detalhes pacientes {{pacientes.origem}} → {{pacientes.destino}}
+            </div> -->
+
+        </div>
+    </ng-template>
+
+    <ng-container *ngIf="pacientes">
+        <form [formGroup]="dadosUpdate" class="form-desk">
+            <div class="form-group">
+                <label for="cliente">Cliente</label>
+                <input pInputText id="cliente" name="cliente" aria-describedby="username-help"
+                    placeholder="Digite o nome do cliente" formControlName="cliente" />
+            </div>
+            <div class="form-group">
+                <label for="origem">Origem</label>
+                <input pInputText id="origem" name="origem" aria-describedby="username-help"
+                    placeholder="Digite a origem" formControlName="origem" />
+            </div>
+            <div class="form-group">
+                <label for="destino">Destino</label>
+                <input pInputText id="destino" name="destino" aria-describedby="username-help"
+                    placeholder="Digite o destino" formControlName="destino" />
+            </div>
+            <div class="form-group">
+                <label for="valor">Valor</label>
+                <p-inputNumber formControlName="valor" mode="currency" currency="BRL" locale="pt-BR"
+                    [minFractionDigits]="2" [maxFractionDigits]="2" placeholder="Digite o valor"
+                    placeholder="R$: 00,00"></p-inputNumber>
+
+            </div>
+            <div class="data_hora">
+                <div class="form-group">
+                    <label for="data_incio">Data inicio</label>
+                    <p-datepicker forceNumericKeyboard  dateFormat="dd/mm/yy" formControlName="dataInicio" showOnFocus="false"
+                    showIcon="true"/>
+                </div>
+                <div class="form-group">
+                    <label for="data_fim">Data Fim</label>
+                    <p-datepicker forceNumericKeyboard  dateFormat="dd/mm/yy" formControlName="dataFim" showOnFocus="false"
+                    showIcon="true"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição</label>
+                <textarea rows="5" cols="30" name="descricao" pTextarea autoResize="none" formControlName="descricao"
+                    placeholder="Digite algo..."></textarea>
+            </div>
+            <div class="btns">
+                <button *ngIf="editTrip" (click)="tripsUpdate()">Salvar</button>
+                <button *ngIf="editTrip" (click)="delete(pacientes)">Excluir</button>
+                <button *ngIf="!editTrip" (click)="editar()">Editar dados</button>
+            </div>
+        </form>
+    </ng-container>
+</p-dialog>
+
+<!-- <div id="contentToConvert" >
+    <div class="header">
+        REGISTRO DA pacientes
+
+        <span class="export-date">
+            Exportado em <span>03/03/2025 16:40</span>
+        </span>
+    </div>
+
+    <div class="container">
+        <div class="trip">
+            Dados da pacientes
+
+            <div class="container_dados" *ngIf="pacientes">
+                <div class="first_dados">
+                    <div class="cliente">
+                        <div id="title">Cliente</div>
+                        <span>{{pacientes.cliente}}</span>
+                    </div>
+                    <div class="origem">
+                        <span id="title">Origem</span>
+                        <span>{{pacientes.origem}}</span>
+                    </div>
+                    <div class="destino">
+                        <span id="title">Destino</span>
+                        <span>{{pacientes.destino}}</span>
+                    </div>
+                    <div class="dataInicio">
+                        <span id="title">Data Inicio</span>
+                        <span>{{pacientes.dataInicio}}</span>
+                    </div>
+                    <div class="dataFim">
+                        <span id="title">Data Fim</span>
+                        <span>{{pacientes.dataFim}}</span>
+                    </div>
+                    <div class="valor">
+                        <span id="title">Valor</span>
+                        <span>{{ formatarDinheiro(pacientes.valor) }}</span>
+
+
+
+                    </div>
+                </div>
+                <div class="second_dados">
+                    <div class="descricao">
+                        <span id="title">Descrição</span>
+                        <span>{{pacientes.descricao}}</span>
+
+                    </div>
+                    <div class="status_trip">
+                        <span id="title">Status</span>
+                        <span
+                            [ngClass]="{'concluido': pacientes.status === 'Concluída', 'andamento': pacientes.status === 'Em andamento'}">{{pacientes.status}}</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="reports">
+            Registros
+
+            <div class="container_dados">
+                <p-table #dt1 [value]="reports" styleClass="p-table-pdf" dataKey="id">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th class="colunm data">Tipo</th>
+                            <th class="colunm data">Data</th>
+                            <th class="colunm data">Hora</th>
+                            <th class="colunm">Descrição</th>
+                            <th class="colunm status">Imagens</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-reports>
+                        <tr>
+                            <td class="colunm data">{{reports.tipo}}</td>
+                            <td class="colunm data">{{reports.data}}</td>
+                            <td class="colunm data">{{reports.hora}}</td>
+                            <td class="colunm">{{reports.descricao}}</td>
+                            <td class="colunm status"><a id="visualizar" [href]="reports.foto"
+                                    target="_blank">Visualizar</a></td>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="4">Nenhum registro encontrado.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+
+
+
+    </div>
+</div> -->

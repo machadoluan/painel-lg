@@ -1,0 +1,40 @@
+<div class="container-slide" [class.open]="isOpen">
+    <div class="first">
+        <div class="logo">
+            <img src="/img/logo-lg.png" alt="">
+            <i class="fa-solid fa-x" (click)="close()"></i>
+        </div>
+        <div class="links">
+            <span class="link" [ngClass]="{'active': isActive('/dashboard')}" routerLink="/dashboard">
+                <div class="icon">
+                    <i class="fa-solid fa-arrow-trend-up"></i>
+                </div>
+                <span>Dashboard</span>
+            </span>
+            <span class="link" [ngClass]="{'active': isActive('/pacientes')}" routerLink="/pacientes">
+                <div class="icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <span>Pacientes</span>
+            </span>
+            <span class="link" [ngClass]="{'active': isActive('/pedidos')}" routerLink="/pedidos">
+                <div class="icon">
+                    <i class="fa-solid fa-book"></i>
+                </div>
+
+                <span>Pedidos</span>
+            </span>
+        </div>
+    </div>
+
+
+    <div class="account" *ngIf="user">
+        <div class="avatar">
+            <img [src]="user.photo" alt="">
+        </div>
+        <div class="info">
+            <span class="name">{{user.name}}</span>
+        </div>
+    </div>
+</div>

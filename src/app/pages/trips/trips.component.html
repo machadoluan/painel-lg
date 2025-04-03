@@ -1,0 +1,313 @@
+<div class="container_viagens">
+    <div class="viagens_header">
+        <span>
+            <span class="title">Todas os pacientes</span>
+            {{pacientes.length}}
+        </span>
+
+        <div class="acoes">
+            <div class="search">
+                <p-iconfield>
+                    <p-inputicon styleClass="pi pi-search" />
+                    <input type="text" pInputText placeholder="Search" (input)="applyFilterGlobal($event)" />
+                </p-iconfield>
+            </div>
+            <p-overlaybadge [value]="selectedFilters.length" *ngIf="selectedFilters.length">
+                <div class="atalho-btn filter" (click)="openFilter()" [ngClass]="{'openFilter': filter}">
+                    <i class="pi pi-filter"></i>
+                    <span>Filtro</span>
+                    <div class="filter_content" *ngIf="filter">
+                        <nav class="filter_nav">
+                            <ul class="filter_list">
+                                <li class="filter_item" (click)="toggleFilter('A a Z')">
+                                    <a class="filter_link" [class.active]="selectedFilters.includes('A a Z')">A a Z</a>
+                                </li>
+                                <li class="filter_item" (click)="toggleFilter('Z a A')">
+                                    <a class="filter_link" [class.active]="selectedFilters.includes('Z a A')">Z a A</a>
+                                </li>
+                                <li class="filter_item" (click)="toggleFilter('Primeiro até o último')">
+                                    <a class="filter_link"
+                                        [class.active]="selectedFilters.includes('Primeiro até o último')">Primeiro até
+                                        o último</a>
+                                </li>
+                                <li class="filter_item" (click)="toggleFilter('Último até o primeiro')">
+                                    <a class="filter_link"
+                                        [class.active]="selectedFilters.includes('Último até o primeiro')">Último até o
+                                        primeiro</a>
+                                </li>
+                                <li class="filter_item" (click)="toggleFilter('Valores: maior para menor')">
+                                    <a class="filter_link"
+                                        [class.active]="selectedFilters.includes('Valores: maior para menor')">Valores:
+                                        maior para menor</a>
+                                </li>
+                                <li class="filter_item" (click)="toggleFilter('Valores: menor para maior')">
+                                    <a class="filter_link"
+                                        [class.active]="selectedFilters.includes('Valores: menor para maior')">Valores:
+                                        menor para maior</a>
+                                </li>
+                                <li class="filter_item" (click)="toggleFilter('Concluídas')">
+                                    <a class="filter_link"
+                                        [class.active]="selectedFilters.includes('Concluídas')">Concluídas</a>
+                                </li>
+                                <li class="filter_item" (click)="toggleFilter('Em andamento')">
+                                    <a class="filter_link" [class.active]="selectedFilters.includes('Em andamento')">Em
+                                        andamento</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </p-overlaybadge>
+
+            <div class="atalho-btn filter" (click)="openFilter()" [ngClass]="{'openFilter': filter}"
+                *ngIf="!selectedFilters.length">
+                <i class="pi pi-filter"></i>
+                <span>Filtro</span>
+                <div class="filter_content" *ngIf="filter">
+                    <nav class="filter_nav">
+                        <ul class="filter_list">
+                            <li class="filter_item" (click)="toggleFilter('A a Z')">
+                                <a class="filter_link" [class.active]="selectedFilters.includes('A a Z')">A a Z</a>
+                            </li>
+                            <li class="filter_item" (click)="toggleFilter('Z a A')">
+                                <a class="filter_link" [class.active]="selectedFilters.includes('Z a A')">Z a A</a>
+                            </li>
+                            <li class="filter_item" (click)="toggleFilter('Primeiro até o último')">
+                                <a class="filter_link"
+                                    [class.active]="selectedFilters.includes('Primeiro até o último')">Primeiro até o
+                                    último</a>
+                            </li>
+                            <li class="filter_item" (click)="toggleFilter('Último até o primeiro')">
+                                <a class="filter_link"
+                                    [class.active]="selectedFilters.includes('Último até o primeiro')">Último até o
+                                    primeiro</a>
+                            </li>
+                            <li class="filter_item" (click)="toggleFilter('Valores: maior para menor')">
+                                <a class="filter_link"
+                                    [class.active]="selectedFilters.includes('Valores: maior para menor')">Valores:
+                                    maior para menor</a>
+                            </li>
+                            <li class="filter_item" (click)="toggleFilter('Valores: menor para maior')">
+                                <a class="filter_link"
+                                    [class.active]="selectedFilters.includes('Valores: menor para maior')">Valores:
+                                    menor para maior</a>
+                            </li>
+                            <li class="filter_item" (click)="toggleFilter('Concluídas')">
+                                <a class="filter_link"
+                                    [class.active]="selectedFilters.includes('Concluídas')">Concluídas</a>
+                            </li>
+                            <li class="filter_item" (click)="toggleFilter('Em andamento')">
+                                <a class="filter_link" [class.active]="selectedFilters.includes('Em andamento')">Em
+                                    andamento</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="atalho-btn exxport" *ngIf="selectedTrips.length > 0" (click)="showDialog(selectedTrips)">
+                <i class="pi pi-file-export"></i>
+                Exportar
+            </div>
+            <div class="atalho-btn details" *ngIf="selectedTrips.length > 0 && selectedTrips.length < 2"
+                (click)="openpacientes(selectedTrips)">
+                <i class="pi pi-info-circle
+                "></i>
+                Detalhes
+            </div>
+            <div class="atalho-btn delete" *ngIf="selectedTrips.length > 0" (click)="delete($event, selectedTrips)">
+                <i class="pi pi-trash"></i>
+                Delete
+            </div>
+            <div class="btn_new_pacientes" (click)="createTrip()">
+                <i class="pi pi-plus"></i>
+               Add Paciente
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <div class="viagens_table">
+        <p-table #dt1 [value]="pacientes" [paginator]="true" [totalRecords]="100" [rows]="10"
+            [(selection)]="selectedTrips" dataKey="id" [tableStyle]="{'min-width': '50rem'}"
+            [globalFilterFields]="['cliente', 'origem', 'destino', 'data_inicio', 'data_fim', 'status']" id="table">
+            <ng-template #header>
+                <tr>
+                    <th class="checkbox"><p-tableHeaderCheckbox /></th>
+                    <th class="registros">Id</th>
+                    <th class="sssssss">Clínica</th>
+                    <th class="colunm data">Médico</th>
+                    <th class="colunm data">Paciente</th>
+                    <th class="colunm data">Data</th>
+                    <th class="colunm status">Prev. Data</th>
+                    <th class="colunm status">Status</th>
+                </tr>
+            </ng-template>
+            <ng-template #body let-pacientes>
+                <tr>
+                    <td>
+                        <p-tableCheckbox [value]="pacientes" />
+                    </td>
+                    <td class="registros">{{pacientes.id}}</td>
+                    <td class="sssssss">{{pacientes.nomeClinica}}</td>
+                    <td class="colunm data">{{pacientes.nomeDoutor}}</td>
+                    <td class="colunm data">{{pacientes.nomePaciente}}</td>
+                    <td class="colunm data">{{pacientes.dataInicio}}</td>
+                    <td class="colunm data">{{pacientes.previsaoDias}} dias uteis</td>
+                    <td class="status"><p-tag [severity]="pacientes.status === 'Concluída' ? 'success' : 'warn'"
+                            [value]="pacientes.status" /></td>
+
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="4">Nenhuma viagem encontrada.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+
+    <div class="viagens_mobile">
+        <div class="pacientes" *ngFor="let pacientes of pacientes" (click)="openpacientesMobile(pacientes)">
+            <span class="cliente">{{pacientes.nomePaciente}} - {{pacientes.dataInicio}}</span>
+
+            <div class="pacientes_dados">
+                <span id="viagem">{{pacientes.nomePaciente}}</span>
+                <span>
+                    <p-tag [severity]="pacientes.status === 'Concluída' ? 'success' : 'warn'" [value]="pacientes.status" />
+                </span>
+            </div>
+        </div>
+
+        <div class="link criar" routerLink="/createTrip">
+            <i class="fa-solid fa-plus"></i>
+        </div>
+
+        <div *ngIf="pacientes.length === 0">
+            Nenhuma viagem encontrada.
+        </div>
+    </div>
+</div>
+
+<p-dialog header="Selecione o Formato de Exportação" [(visible)]="displayDialog" [style]="{width: '400px'}"
+    styleClass="meu_dialog" [modal]="true" draggable="false">
+    <div class="select">
+        <p-selectButton [options]="exportOptions" [(ngModel)]="selectedFormat"></p-selectButton>
+    </div>
+    <ng-template pTemplate="footer">
+        <button id="cancel">Cancelar</button>
+        <button id="exportar" (click)="export()">Exportar</button>
+    </ng-template>
+</p-dialog>
+
+
+
+
+
+<app-create-reports></app-create-reports>
+
+
+<div id="contentToConvert">
+    <div class="header">
+        REGISTRO DA VIAGEM
+
+        <span class="export-date">
+            Exportado em <span>03/03/2025 16:40</span>
+        </span>
+    </div>
+
+    <div class="container">
+        <div class="trip">
+            Dados da viagem
+
+            <div class="container_dados" *ngIf="pacientesSelecionada">
+                <div class="first_dados">
+                    <div class="cliente">
+                        <div id="title">Cliente</div>
+                        <span>{{pacientesSelecionada.cliente}}</span>
+                    </div>
+                    <div class="origem">
+                        <span id="title">Origem</span>
+                        <span>{{pacientesSelecionada.origem}}</span>
+                    </div>
+                    <div class="destino">
+                        <span id="title">Destino</span>
+                        <span>{{pacientesSelecionada.destino}}</span>
+                    </div>
+                    <div class="dataInicio">
+                        <span id="title">Data Inicio</span>
+                        <span>{{pacientesSelecionada.dataInicio}}</span>
+                    </div>
+                    <div class="dataFim">
+                        <span id="title">Data Fim</span>
+                        <span>{{pacientesSelecionada.dataFim}}</span>
+                    </div>
+                    <div class="valor">
+                        <span id="title">Valor</span>
+                        <span>{{ formatarDinheiro(pacientesSelecionada.valor) }}</span>
+
+
+
+                    </div>
+                </div>
+                <div class="second_dados">
+                    <div class="descricao">
+                        <span id="title">Descrição</span>
+                        <span>{{pacientesSelecionada.descricao}}</span>
+
+                    </div>
+                    <div class="status_trip">
+                        <span id="title">Status</span>
+                        <span
+                            [ngClass]="{'concluido': pacientesSelecionada.status === 'Concluída', 'andamento': pacientesSelecionada.status === 'Em andamento'}">{{pacientesSelecionada.status}}</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="reports">
+            Registros
+
+            <div class="container_dados">
+                <p-table #dt1 [value]="reports" styleClass="p-table-pdf" dataKey="id">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th class="colunm data">Tipo</th>
+                            <th class="colunm data">Data</th>
+                            <th class="colunm data">Hora</th>
+                            <th class="colunm">Descrição</th>
+                            <th class="colunm status">Imagens</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-reports>
+                        <tr>
+                            <td class="colunm data">{{reports.tipo}}</td>
+                            <td class="colunm data">{{reports.data}}</td>
+                            <td class="colunm data">{{reports.hora}}</td>
+                            <td class="colunm">{{reports.descricao}}</td>
+                            <td class="colunm status"><a id="visualizar" [href]="reports.foto"
+                                    target="_blank">Visualizar</a></td>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="4">Nenhum registro encontrado.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

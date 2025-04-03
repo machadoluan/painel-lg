@@ -1,0 +1,75 @@
+ header {
+     width: 100%;
+     padding-top: 2rem;
+     padding-bottom: 1rem;
+     padding-left: 1rem;
+     padding-right: 20px;
+     border-bottom: 1px solid var(--card-border);
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     position: fixed;
+     z-index: 99;
+     background-color: var(--background-color);
+
+     &.sidebar-open {
+         width: calc(100% - 250px);
+     }
+
+     .icon {
+         width: 40px;
+         height: 40px;
+         display: grid;
+         place-content: center;
+         border-radius: 50%;
+         cursor: pointer;
+         transition: all 200ms ease-in-out;
+
+         &:hover {
+             background-color: var(--primary);
+
+             i {
+                 color: white;
+             }
+         }
+
+
+     }
+
+     .title-btn {
+         display: flex;
+         gap: 1rem;
+         align-items: center;
+     }
+ }
+
+
+ @media screen and (max-width: 990px) {
+     header {
+
+
+         &.sidebar-open {
+             width: 100%;
+         }
+
+     }
+ }
+
+ @media screen and (max-width: 750px) {
+     header {
+         justify-content: center;
+
+         .icon {
+             display: none;
+         }
+
+         p-button {
+             display: none;
+         }
+     }
+ }
+
+ ::ng-deep .p-button-outlined {
+     color: #000 !important;
+     border-color: #000 !important;
+ }

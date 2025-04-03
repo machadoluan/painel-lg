@@ -1,0 +1,515 @@
+.container_trip {
+    width: 100%;
+    height: 100vh;
+    border: 3px solid var(--card-border);
+    border-radius: 45px;
+    position: fixed;
+    z-index: 99;
+
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        padding: 1.5rem;
+        align-items: center;
+
+        .pacientes {
+            font-size: 14px;
+        }
+
+        .menu {
+            position: relative;
+
+            .dropItens {
+                position: absolute;
+                top: 20px;
+                right: 0;
+                width: 200px;
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1rem;
+                background-color: white;
+                border: 1px solid rgba($color: #000000, $alpha: 0.3) !important;
+                border-radius: var(--p-inputtext-border-radius);
+                z-index: 99999;
+
+                span {
+                    font-size: 13px;
+                    display: flex;
+                    align-items: center;
+                    gap: .5rem;
+
+
+                    i {
+                        color: rgba($color: #000000, $alpha: 0.7);
+                        width: 15px;
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+
+
+
+    }
+
+
+    .trip_content {
+        z-index: 999;
+
+        form {
+            height: calc(100vh - 240px);
+            overflow-y: scroll;
+            padding: .5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                gap: .5rem;
+
+                label {
+                    font-size: 14px;
+                }
+            }
+
+            .data_hora {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                gap: 1rem;
+
+                .form-group {
+                    flex: 1;
+
+                    input {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .btns {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+
+                button {
+                    padding: .5rem 1rem;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+
+                    &:nth-child(1) {
+                        border: 1px solid var(--color);
+                        background-color: transparent;
+                        color: var(--color);
+                    }
+
+                    &:nth-child(2) {
+                        background-color: red;
+
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+
+::ng-deep .p-inputtext,
+.p-textarea {
+    background-color: transparent !important;
+    color: var(--color) !important;
+    font-size: 12px !important;
+
+    &:disabled {
+        background-color: rgba($color: #d1d1d1, $alpha: .5) !important;
+        color: rgba($color: #000000, $alpha: 1.0) !important;
+        border: none;
+        cursor: not-allowed;
+
+    }
+
+    &:focus {
+        border-color: var(--primary) !important;
+    }
+}
+
+::ng-deep .meu_dialo3 {
+    width: 40%;
+    height: 100%;
+    padding: 0 1rem;
+    background-color: var(--background-color) !important;
+    color: var(--color) !important;
+
+    .p-datepicker {
+        width: 100% !important;
+    }
+
+    .p-inputtext,
+    .p-textarea {
+        width: 100% !important;
+        background-color: transparent !important;
+        color: var(--color) !important;
+        font-size: 14px !important;
+
+        &:focus {
+            border-color: var(--primary) !important;
+        }
+    }
+
+    .p-dialog-content {
+        &::-webkit-scrollbar {
+            width: 5px;
+            /* width of the entire scrollbar */
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: var(--card-border);
+            /* color of the scroll thumb */
+            border-radius: 20px;
+            /* roundness of the scroll thumb */
+        }
+    }
+
+    @media (max-width: 1200px) {
+        width: 50% !important;
+    }
+
+    @media (max-width: 992px) {
+        width: 60% !important;
+    }
+
+    @media (max-width: 768px) {
+        width: 70% !important;
+    }
+
+    @media (max-width: 576px) {
+        width: 90% !important;
+        padding: 0 0.5rem;
+    }
+}
+
+
+.form-desk {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        label {
+            font-size: 14px;
+        }
+    }
+
+    .data_hora {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+
+        .form-group {
+            flex: 1;
+
+            input {
+                width: 100%;
+            }
+        }
+    }
+
+    .btns {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        button {
+            padding: .5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+
+            &:nth-child(1) {
+                border: 1px solid var(--color);
+                background-color: transparent;
+                color: var(--color);
+            }
+
+            &:nth-child(2) {
+                background-color: red;
+
+            }
+        }
+    }
+
+}
+
+
+::ng-deep .p-textarea {
+    background-color: transparent !important;
+    color: var(--color) !important;
+    font-size: 12px !important;
+
+    &:disabled {
+        background-color: rgba($color: #d1d1d1, $alpha: .5) !important;
+        color: rgba($color: #000000, $alpha: 1.0) !important;
+        border: none;
+        cursor: not-allowed;
+
+    }
+
+    &:focus {
+        border-color: var(--primary) !important;
+    }
+}
+
+#contentToConvert {
+    width: 210mm;
+    //  height: 297mm;
+    box-sizing: border-box;
+    page-break-inside: avoid;
+    /* Evita quebra no meio do conteúdo */
+    page-break-before: auto;
+    page-break-after: auto;
+    /* Garante que nada vaze pra outra página */
+    visibility: hidden; /* Oculta o conteúdo visualmente */
+    position: absolute; /* Remove o elemento do fluxo normal */
+    top: -9999px;      /* Move o elemento para fora da tela */
+    left: -9999px;
+
+    .header {
+        text-align: center;
+        padding: 3rem 0;
+        background-color: var(--primary);
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        position: relative;
+
+        .export-date {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            font-size: 10px;
+            font-weight: normal;
+
+            span {
+                font-weight: bold;
+
+            }
+        }
+    }
+
+    .container {
+        flex-grow: 1;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+
+        .trip {
+            padding-top: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            font-size: 20px;
+            font-weight: bold;
+            color: rgba($color: #000, $alpha: 0.7);
+
+
+            .container_dados {
+                width: 70%;
+                gap: 8rem;
+                display: flex;
+                background-color: rgba($color: #d1d1d1, $alpha: .05);
+                border-radius: 5px;
+                padding: 10px;
+
+                .first_dados {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    gap: .5rem;
+
+                    div {
+                        display: flex;
+
+                        #title {
+                            width: 90px;
+                            font-size: 14px;
+                            color: rgba($color: #000, $alpha: 0.7);
+                            font-weight: 500;
+                        }
+
+                        span {
+                            font-size: 14px;
+                            font-weight: bold;
+                            color: rgba($color: #000, $alpha: 0.7);
+                        }
+                    }
+                }
+
+                .second_dados {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+
+                    div {
+                        display: flex;
+                        flex-direction: column;
+                        gap: .5rem;
+
+                        #title {
+                            width: 90px;
+                            font-size: 14px;
+                            color: rgba($color: #000, $alpha: 0.7);
+                            font-weight: 500;
+                        }
+
+                        span {
+                            font-size: 14px;
+                            font-weight: bold;
+                            color: rgba($color: #000, $alpha: 0.7);
+                        }
+
+                        .concluido {
+                            color: #1AB752;
+                        }
+
+                        .andamento {
+                            color: #f1b635;
+                        }
+                    }
+                }
+            }
+        }
+
+        .reports {
+            padding-top: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            font-size: 20px;
+            font-weight: bold;
+            color: rgba($color: #000, $alpha: 0.7);
+
+            .container_dados {
+                display: flex;
+                background-color: rgba($color: #d1d1d1, $alpha: .1);
+                border-radius: 5px;
+                padding: 10px 2rem;
+
+
+
+                #visualizar {
+                    color: #3B82F6;
+                }
+
+
+            }
+        }
+
+
+    }
+}
+
+
+::ng-deep .p-table-pdf {
+    page-break-inside: avoid;
+}
+
+::ng-deep .p-datatable-tbody>tr>td {
+    background-color: transparent !important;
+    color: black !important;
+    font-size: 14px;
+    font-weight: 400;
+    border-style: none !important;
+}
+
+::ng-deep .p-datatable-thead>tr>th {
+    background-color: transparent !important;
+    color: black !important;
+    font-size: 14px;
+    font-weight: 400;
+    border-style: none !important;
+
+}
+
+::ng-deep .p-datatable-tbody>tr {
+    background-color: transparent !important;
+}
+
+.temp-pdf-container {
+    position: fixed;
+    top: -9999px;
+    left: -9999px;
+    visibility: visible; /* Garante que o conteúdo seja renderizado */
+    opacity: 1; /* Garante que o conteúdo não esteja transparente */
+  }
+
+
+  ::ng-deep .p-datepicker {
+    position: static !important;
+
+    .p-datepicker-header {
+        background-color: white !important;
+        color: black !important;
+
+        .p-button-text {
+            color: var(--primary);
+        }
+
+        .p-datepicker-select-month,
+        .p-datepicker-select-year {
+            color: black !important;
+        }
+    }
+
+    .p-datepicker-panel {
+        // position: fixed !important;
+        min-width: 240px !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        background-color: white !important;
+        color: black !important;
+    }
+
+    .p-datepicker-day {
+        color: black !important;
+    }
+
+    .p-datepicker-month,
+    .p-datepicker-year {
+        color: black !important;
+    }
+
+    .p-datepicker-dropdown {
+        background-color: var(--primary) !important;
+        color: white !important;
+    }
+
+    .p-datepicker-day-selected {
+        background-color: var(--primary) !important;
+        color: white !important;
+    }
+
+    .p-datepicker-today > .p-datepicker-day{
+        background-color: #d1d1d1 !important;
+    }
+}

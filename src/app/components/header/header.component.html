@@ -1,0 +1,9 @@
+<header [class.sidebar-open]="isSidebarOpen">
+    <div class="title-btn">
+        <div class="icon" (click)="onToggleSidebar()"><i class="fa-solid fa-bars"></i></div>
+        <span>{{title}}</span>
+    </div>
+    <p-button label="Sair" icon="pi pi-sign-out
+        " badgeSeverity="contrast" styleClass="m-0" [outlined]="true" (click)="logout($event)" />
+
+</header>

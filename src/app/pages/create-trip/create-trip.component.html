@@ -1,0 +1,52 @@
+<div class="container_create">
+    <form [formGroup]="dadosCadastroTrips">
+        <div class="form-group">
+            <label for="cliente">Cliente</label>
+            <input pInputText id="cliente" aria-describedby="username-help" placeholder="Digite o nome do cliente"
+                formControlName="cliente" />
+        </div>
+        <div class="form-group">
+            <label for="origem">Origem</label>
+            <input pInputText id="origem" aria-describedby="username-help" placeholder="Digite a origem"
+                formControlName="origem" />
+        </div>
+        <div class="form-group">
+            <label for="destino">Destino</label>
+            <input pInputText id="destino" aria-describedby="username-help" placeholder="Digite o destino"
+                formControlName="destino" />
+        </div>
+        <div class="form-group">
+            <label for="valor">Valor</label>
+            <p-inputNumber forceNumericKeyboard formControlName="valor" mode="currency" currency="BRL" locale="pt-BR"
+            [minFractionDigits]="2" [maxFractionDigits]="2" placeholder="Digite o valor"
+            placeholder="R$: 0,00" ></p-inputNumber>
+        </div>
+        <div class="data_hora">
+            <div class="form-group">
+                <label for="data">Data inicio</label>
+                <p-datepicker forceNumericKeyboard  dateFormat="dd/mm/yy" formControlName="dataInicio" placeholder="00/00/0000"
+                    inputId="dataInicioInput" showOnFocus="false"
+                    showIcon="true"></p-datepicker>
+
+
+
+            </div>
+            <div class="form-group">
+                <label for="dataFim">Data Fim</label>
+                <p-datepicker forceNumericKeyboard  dateFormat="dd/mm/yy" formControlName="dataFim" placeholder="00/00/0000"
+                    inputId="dataFimInput"  showOnFocus="false"
+                    showIcon="true"></p-datepicker>
+
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="descricao">Descrição</label>
+            <textarea rows="5" cols="30" pTextarea autoResize="none" placeholder="Digite algo..."></textarea>
+        </div>
+        <div class="btns">
+            <button (click)="createTrip()" [disabled]="dadosCadastroTrips.invalid">Criar</button>
+            <button routerLink="/trip">Cancelar</button>
+        </div>
+    </form>
+</div>

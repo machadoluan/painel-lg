@@ -1,0 +1,469 @@
+ .container_registros {
+     width: 100%;
+     padding: 0 20px;
+
+
+     .registros_header {
+         width: 100%;
+         display: flex;
+         justify-content: space-between;
+         padding: 1.5rem 0;
+         align-items: center;
+
+         .title {
+             font-weight: bold;
+         }
+
+         .acoes {
+             display: flex;
+             align-items: center;
+             gap: 1rem;
+
+             .search {
+                 .p-inputtext {
+                     width: 200px;
+                     ;
+                     background-color: transparent !important;
+                     border: 1px solid rgba($color: #000000, $alpha: 0.3) !important;
+                     color: #000000 !important;
+                     font-size: 14px;
+                 }
+             }
+
+             .atalho-btn {
+                display: flex;
+                align-items: center;
+                padding: .5rem 1rem;
+                cursor: pointer;
+                gap: .5rem;
+                border: 1px solid rgba($color: #000000, $alpha: 0.3) !important;
+                border-radius: var(--p-inputtext-border-radius);
+                font-size: 14px;
+                position: relative;
+
+                i {
+                    color: var(--p-form-field-placeholder-color);
+                    font-size: 14px;
+
+                }
+
+                &.openFilter {
+                    background-color: var(--card-border);
+                }
+
+                &.delete {
+                    border: 1px solid rgba($color: red, $alpha: 0.7) !important;
+                    background-color: red;
+                    color: white;
+                    font-weight: 500;
+
+                    i {
+                        color: white;
+
+                        font-size: 14px;
+
+                    }
+                }
+
+
+
+                .filter_content {
+                    width: 250px;
+                    position: absolute;
+                    padding: 1rem;
+                    background-color: var(--background-color);
+                    border-radius: 8px;
+                    max-width: 300px;
+                    box-shadow: 0px 0px 13px 12px rgba(0, 0, 0, 0.1);
+                    margin: 0 auto;
+                    z-index: 9;
+                    top: 150%;
+                    right: 0;
+
+                    .filter_nav {
+                        .filter_list {
+                            list-style: none;
+                            padding: 0;
+                            margin: 0;
+
+                            .filter_item {
+                                margin-bottom: 0.5rem;
+
+                                .filter_link {
+                                    display: block;
+                                    padding: 0.5rem;
+                                    background-color: #fff;
+                                    border-radius: 4px;
+                                    color: #555;
+                                    text-decoration: none;
+                                    font-size: 14px;
+                                    transition: all 0.3s ease;
+
+                                    &:hover {
+                                        background-color: var(--card-border);
+                                    }
+
+                                    &.active {
+                                        background-color: rgba($color: #0056b3, $alpha: 0.5);
+                                        border-color: #0056b3;
+                                        color: white;
+                                        font-weight: bold;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+             .btn_new_pacientes {
+                 display: flex;
+                 gap: .5rem;
+                 align-items: center;
+                 padding: .5rem 1rem;
+                 background-color: var(--primary);
+                 font-weight: bold;
+                 color: white;
+                 font-size: 14px;
+                 cursor: pointer;
+
+                 border-radius: var(--p-inputtext-border-radius);
+
+                 i {
+
+                     font-size: 14px;
+
+                 }
+             }
+         }
+     }
+
+     .reports_mobile {
+         display: none;
+         flex-direction: column;
+         gap: 1rem;
+
+         .criar {
+            width: 40px;
+            height: 40px;
+            position: fixed;
+            right: 20px;
+            bottom: 80px;
+            display: grid;
+            place-content: center;
+            border-radius: 50%;
+            background-color: var(--primary);
+            font-size: 12px;
+            color: var(--primary);
+            font-weight: bold;
+
+            i {
+                font-size: 16px;
+                color: white;
+            }
+        }
+
+
+         .report {
+             padding: 1rem;
+             display: flex;
+             flex-direction: column;
+             align-items: flex-start;
+             gap: .5rem;
+             border: 1px solid rgba($color: #000, $alpha: 0.3);
+             border-radius: 10px;
+             cursor: pointer;
+
+
+             .cliente {
+                 font-size: 14px;
+                 font-weight: bold;
+             }
+
+             .report_dados {
+                 width: 100%;
+                 font-size: 12px;
+                 display: flex;
+                 justify-content: space-between;
+                 align-items: center;
+
+                 #tipo {
+                     align-items: center;
+                     white-space: nowrap;
+                     overflow: hidden;
+                     text-overflow: ellipsis;
+                 }
+
+                 div {
+                     display: flex;
+                     align-items: center;
+                     gap: .5rem;
+                 }
+
+             }
+         }
+
+
+         @media screen and (max-width: 350px) {
+            #tipo {
+                align-items: center;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                flex: .8;
+            }
+         }
+     }
+ }
+
+
+ // Style Table
+ ::ng-deep .p-datatable-thead>tr>th {
+     background-color: var(--card-border) !important;
+     color: black !important;
+     font-size: 14px;
+     font-weight: 400;
+     border-style: none !important;
+
+ }
+
+ ::ng-deep .p-datatable-tbody>tr {
+     background-color: transparent !important;
+ }
+
+ ::ng-deep .p-datatable-tbody>tr>td {
+     background-color: transparent !important;
+     color: black !important;
+     font-weight: 500;
+     font-size: 12px;
+     border-color: var(--card-border) !important
+ }
+
+ ::ng-deep .p-datatable .p-datatable-thead>tr>th:first-child {
+
+     border-radius: 10px 0 0 10px;
+ }
+
+ ::ng-deep .p-datatable .p-datatable-thead>tr>th:last-child {
+     border-radius: 0 10px 10px 0;
+
+ }
+
+ ::ng-deep .p-checkbox-box {
+     background-color: transparent !important;
+ }
+
+ ::ng-deep .p-checkbox-checked .p-checkbox-box {
+     background-color: var(--primary) !important;
+     border-color: transparent !important;
+
+ }
+
+ ::ng-deep .p-checkbox-checked .p-checkbox-icon {
+     color: white !important;
+ }
+
+ .checkbox {
+     width: 10px !important;
+ }
+
+
+ .registros {
+     text-align: start !important;
+     color: #000 !important;
+     padding: 0;
+ }
+
+ .status{
+    .p-tag-warn{
+        width: 100%;
+    }
+}
+
+ ::ng-deep .p-paginator {
+     background-color: transparent !important;
+ }
+
+ ::ng-deep .p-paginator-page.p-paginator-page-selected {
+     color: #000 !important;
+     background-color: rgba($color: #000000, $alpha: 0.1) !important;
+
+ }
+
+ .select {
+     width: 100%;
+     justify-content: center;
+     display: flex;
+ }
+
+ ::ng-deep .meu_dialo4 {
+     border-color: none !important;
+     background-color: var(--background-color) !important;
+
+     .p-button-text.p-button-secondary:not(:disabled):hover {
+         background-color: var(--card-border) !important;
+     }
+
+     .p-dialog-title {
+         font-size: 16px !important;
+         color: var(--color) !important;
+     }
+
+     .p-dialog-footer {
+         button {
+             padding: .4rem .5rem;
+             cursor: pointer;
+
+             &#cancel {
+                 background-color: red;
+                 border: none;
+                 border-radius: 5px;
+             }
+
+             &#exportar {
+                 background-color: var(--primary);
+                 border: none;
+                 border-radius: 5px;
+             }
+         }
+     }
+ }
+
+ ::ng-deep .p-overlaybadge .p-badge {
+     background-color: var(--primary);
+     color: white;
+     outline: none !important;
+ }
+
+
+ @media screen and (max-width: 750px) {
+
+
+     .container_registros {
+         width: 100%;
+
+         .registros_header {
+             flex-direction: column;
+             gap: 1rem;
+
+             span {
+                 display: none;
+             }
+
+             .acoes {
+                 display: flex;
+                 align-items: center;
+                 gap: 1rem;
+                 width: 100% !important;
+
+                 .search {
+                     width: 100%;
+
+                     .p-inputtext {
+                         width: 100%;
+
+                         background-color: transparent !important;
+                         border: 1px solid rgba($color: #000000, $alpha: 0.3) !important;
+                         color: #000000 !important;
+                         font-size: 14px !important;
+                     }
+                 }
+
+                 .filter {
+                     display: flex;
+                     align-items: center;
+                     padding: .5rem 1rem;
+                     cursor: pointer;
+                     gap: .5rem;
+                     border: 1px solid rgba($color: #000, $alpha: 0.3);
+                     border-radius: var(--p-inputtext-border-radius);
+                     font-size: 14px;
+
+                     i {
+                         color: var(--p-form-field-placeholder-color);
+                         font-size: 14px;
+
+                     }
+                 }
+
+                 .btn_new_pacientes {
+                     display: none !important;
+
+                 }
+             }
+         }
+
+         .registros_table {
+             display: none !important;
+         }
+
+         .reports_mobile {
+             display: flex;
+         }
+
+     }
+ }
+
+
+
+ @media screen and (max-width: 400px) {
+
+     .container_reports {
+         width: 100%;
+
+         .reports_header {
+             flex-direction: column;
+             gap: 1rem;
+
+             .title {
+                 font-weight: bold;
+             }
+
+             .acoes {
+                 display: flex;
+                 align-items: center;
+                 gap: 1rem;
+                 width: 100% !important;
+
+                 .search {
+                     width: 100%;
+
+                     .p-inputtext {
+                         width: 100%;
+
+                         background-color: transparent !important;
+                         border: 1px solid rgba($color: #000000, $alpha: 0.3) !important;
+                         color: #000000 !important;
+                         font-size: 12px !important;
+                     }
+                 }
+
+                 .filter {
+                     display: flex;
+                     align-items: center;
+                     padding: .5rem 1rem;
+                     cursor: pointer;
+                     gap: .5rem;
+                     border: 1px solid rgba($color: #000, $alpha: 0.3);
+                     border-radius: var(--p-inputtext-border-radius);
+                     font-size: 14px;
+
+                     span {
+                         display: none !important;
+                     }
+
+                     i {
+                         color: var(--p-form-field-placeholder-color);
+                         font-size: 14px;
+                     }
+                 }
+
+                 .btn_new_pacientes {
+                     display: none !important;
+
+                 }
+             }
+         }
+
+     }
+ }

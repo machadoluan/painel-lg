@@ -1,0 +1,23 @@
+<ng-container *ngIf="showDefaultLayout(); else defaultLayout">
+    <router-outlet></router-outlet>
+</ng-container>
+
+<ng-template #defaultLayout>
+    <div class="container-slide">
+        <app-slidebar [class.open]="isSidebarOpen" [isOpen]="isSidebarOpen" (closeSidebar)="toggleSidebar()">
+        </app-slidebar>
+    </div>
+    <div class="container" [class.sidebar-open]="isSidebarOpen">
+        <app-header [isSidebarOpen]="isSidebarOpen" (toggleSidebar)="toggleSidebar()"></app-header>
+        <div class="main">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <app-slidebar-mobile></app-slidebar-mobile>
+</ng-template>
+
+<p-toast position="top-center"></p-toast>
+<p-confirmdialog
+  [style]="{ width: '450px' }"
+  rejectButtonStyleClass="p-button-text"
+></p-confirmdialog>

@@ -1,0 +1,25 @@
+<div class="container-slide">
+    <div class="links">
+        <div class="link" [ngClass]="{'active': isActive('/dashboard')}" routerLink="/dashboard">
+            <i class="fas fa-home"></i>
+            Inicio
+        </div>
+        <span class="link" [ngClass]="{'active': isActive('/pedidos')}" routerLink="/pedidos">
+            <div class="icon">
+                <i class="fa-solid fa-book"></i>
+            </div>
+            Pedidos
+        </span>
+        <span class="link" [ngClass]="{'active': isActive('/pacientes')}" routerLink="/pacientes">
+            <div class="icon">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            Pacientes
+        </span>
+        <div class="link" routerLink="/account" [ngClass]="{'active': isActive('/account')}">
+            <i class="fa-solid fa-user"></i>
+            Perfil
+        </div>
+    </div>
+</div>

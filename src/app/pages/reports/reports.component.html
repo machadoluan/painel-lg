@@ -1,0 +1,174 @@
+<div class="container_registros">
+    <div class="registros_header">
+        <span>
+            <span class="title">Todos os pedidos</span>
+            {{pacientes.length}}
+        </span>
+
+        <div class="acoes">
+            <div class="search">
+                <p-iconfield>
+                    <p-inputicon styleClass="pi pi-search" />
+                    <input type="text" pInputText placeholder="Search" (input)="applyFilterGlobal($event)" />
+                </p-iconfield>
+            </div>
+            <p-overlaybadge [value]="selectedFilters.length" *ngIf="selectedFilters.length">
+                <div class="atalho-btn filter" (click)="openFilter()" [ngClass]="{'openFilter': filter}">
+                    <i class="pi pi-filter"></i>
+                    <span>Filtro</span>
+                    <div class="filter_content" *ngIf="filter">
+                        <nav class="filter_nav">
+                            <ul class="filter_list">
+                                <li class="filter_item" (click)="toggleFilter('hoje')">
+                                  <a class="filter_link" [class.active]="selectedFilters.includes('hoje')">Hoje</a>
+                                </li>
+                                <li class="filter_item" (click)="toggleFilter('andamento')">
+                                  <a class="filter_link" [class.active]="selectedFilters.includes('andamento')">Em Andamento</a>
+                                </li>
+                                <li class="filter_item" (click)="toggleFilter('finalizados')">
+                                  <a class="filter_link" [class.active]="selectedFilters.includes('finalizados')">Finalizados</a>
+                                </li>
+                                <li class="filter_item" (click)="toggleFilter('feminino')">
+                                  <a class="filter_link" [class.active]="selectedFilters.includes('feminino')">Feminino</a>
+                                </li>
+                                <li class="filter_item" (click)="toggleFilter('masculino')">
+                                  <a class="filter_link" [class.active]="selectedFilters.includes('masculino')">Masculino</a>
+                                </li>
+                                <li class="filter_item" (click)="toggleFilter('longa-duracao')">
+                                  <a class="filter_link" [class.active]="selectedFilters.includes('longa-duracao')">> 10 dias</a>
+                                </li>
+                              </ul>
+                              
+                        </nav>
+                    </div>
+                </div>
+            </p-overlaybadge>
+            <div class="atalho-btn filter" (click)="openFilter()" [ngClass]="{'openFilter': filter}"
+                *ngIf="!selectedFilters.length">
+                <i class="pi pi-filter"></i>
+                <span>Filtro</span>
+                <div class="filter_content" *ngIf="filter">
+                    <nav class="filter_nav">
+                        <ul class="filter_list">
+                            <li class="filter_item" (click)="toggleFilter('hoje')">
+                              <a class="filter_link" [class.active]="selectedFilters.includes('hoje')">Hoje</a>
+                            </li>
+                            <li class="filter_item" (click)="toggleFilter('andamento')">
+                              <a class="filter_link" [class.active]="selectedFilters.includes('andamento')">Em Andamento</a>
+                            </li>
+                            <li class="filter_item" (click)="toggleFilter('finalizados')">
+                              <a class="filter_link" [class.active]="selectedFilters.includes('finalizados')">Finalizados</a>
+                            </li>
+                            <li class="filter_item" (click)="toggleFilter('feminino')">
+                              <a class="filter_link" [class.active]="selectedFilters.includes('feminino')">Feminino</a>
+                            </li>
+                            <li class="filter_item" (click)="toggleFilter('masculino')">
+                              <a class="filter_link" [class.active]="selectedFilters.includes('masculino')">Masculino</a>
+                            </li>
+                            <li class="filter_item" (click)="toggleFilter('longa-duracao')">
+                              <a class="filter_link" [class.active]="selectedFilters.includes('longa-duracao')">> 10 dias</a>
+                            </li>
+                          </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="atalho-btn filter" *ngIf="selectedRegistros.length > 0" (click)="showDialog()">
+                <i class="pi pi-file-export"></i>
+                Exportar
+            </div>
+            <div class="atalho-btn details" *ngIf="selectedRegistros.length > 0 && selectedRegistros.length < 2"
+                (click)="openReports(selectedRegistros)">
+                <i class="pi pi-info-circle
+                "></i>
+                Detalhes
+            </div>
+            <div class="atalho-btn delete" *ngIf="selectedRegistros.length > 0" (click)="delete($event, selectedRegistros)">
+                <i class="pi pi-trash"></i>
+                Delete
+            </div>
+            <div class="btn_new_pacientes" (click)="createReport()">
+                <i class="pi pi-plus"></i>
+                Add Pedido
+            </div>
+        </div>
+    </div>
+
+    <div class="registros_table">
+        <p-table #dt1 [value]="pacientes" [paginator]="true" [totalRecords]="100" [rows]="10"
+            [(selection)]="registrosPacientes" dataKey="id" [tableStyle]="{'min-width': '50rem'}"
+            [globalFilterFields]="['cliente', 'origem', 'destino', 'data_inicio', 'data_fim', 'status']" id="table">
+            <ng-template #header>
+                <tr>
+                    <th class="checkbox"><p-tableHeaderCheckbox /></th>
+                    <th class="registros">Id</th>
+                    <th class="sssssss">Clínica</th>
+                    <th class="colunm data">Médico</th>
+                    <th class="colunm data">Paciente</th>
+                    <th class="colunm data">Data</th>
+                    <th class="colunm status">Prev. Data</th>
+                    <th class="colunm status">Status</th>
+                </tr>
+            </ng-template>
+            <ng-template #body let-pacientes>
+                <tr>
+                    <td>
+                        <p-tableCheckbox [value]="pacientes" />
+                    </td>
+                    <td class="registros">{{pacientes.id}}</td>
+                    <td class="sssssss">{{pacientes.nomeClinica}}</td>
+                    <td class="colunm data">{{pacientes.nomeDoutor}}</td>
+                    <td class="colunm data">{{pacientes.nomePaciente}}</td>
+                    <td class="colunm data">{{pacientes.dataInicio}}</td>
+                    <td class="colunm data">{{pacientes.previsaoDias}} dias uteis</td>
+                    <td class="status"><p-tag [severity]="pacientes.status === 'Concluída' ? 'success' : 'warn'"
+                            [value]="pacientes.status" /></td>
+
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="4">Nenhuma viagem encontrada.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+
+
+    <div class="reports_mobile">
+        <div class="report" *ngFor="let pacientes of pacientes" (click)="openReportsMobile(pacientes)">
+
+            <span class="cliente">{{pacientes.nomePaciente}} - {{pacientes.dataInicio}}</span>
+
+            <div class="report_dados">
+                <span id="tipo">{{pacientes.nomePaciente}}</span>
+                <span>
+                    <p-tag [severity]="pacientes.status === 'Concluída' ? 'success' : 'warn'" [value]="pacientes.status" />
+                </span>
+            </div>
+        </div>
+
+        <div class="link criar" routerLink="/createReport">
+            <i class="fa-solid fa-plus"></i>
+        </div>
+
+        <div *ngIf="pacientes.length === 0">
+            Nenhum registro encontrado.
+        </div>
+    </div>
+</div>
+
+<p-dialog header="Selecione o Formato de Exportação" [(visible)]="displayDialog" [style]="{width: '400px'}"
+    styleClass="meu_dialo4" [modal]="true" draggable="false">
+    <div class="select">
+        <p-selectButton [options]="exportOptions" [(ngModel)]="selectedFormat"></p-selectButton>
+    </div>
+   
+    <ng-template pTemplate="footer">
+        <button id="cancel">Cancelar</button>
+        <button id="exportar" (click)="export()">Exportar</button>
+    </ng-template>
+</p-dialog>
+
+<app-create-reports></app-create-reports>
